@@ -222,6 +222,7 @@ img { max-width: 100%; display: block; }
 /* ─── Hero ─── */
 .hero {
   padding: 100px 0 120px;
+  margin:0%;
   position: relative;
   display: flex;
   align-items: center;
