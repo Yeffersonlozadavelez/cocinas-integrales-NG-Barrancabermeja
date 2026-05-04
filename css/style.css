@@ -33,6 +33,7 @@
 
 /* ─── Reset ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-cuerpo);
@@ -49,7 +50,7 @@ img { max-width: 100%; display: block; }
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0;
 }
 
 /* ─── Utilities ─── */
@@ -159,9 +160,7 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
   padding-top: 22px;
   padding-bottom: 22px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: relative;
   background: var(--ng-negro);
   transition: box-shadow var(--transition);
 }
