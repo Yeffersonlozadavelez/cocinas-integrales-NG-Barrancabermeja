@@ -1,0 +1,21 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="800" fill="#F5F0E8"/>
+
+  <!-- Letras NG centradas -->
+  <text x="332" y="520" text-anchor="middle" font-family="Georgia, serif" font-size="240" font-weight="700" fill="#1A1A1A">N</text>
+  <text x="496" y="520" text-anchor="middle" font-family="Georgia, serif" font-size="240" font-weight="700" fill="#C9A84C">G</text>
+
+  <!-- Techo -->
+  <polygon points="410,220 620,320 200,320" fill="#1A1A1A"/>
+  <rect x="200" y="310" width="420" height="14" rx="3" fill="#333333"/>
+
+  <!-- Línea base -->
+  <rect x="200" y="542" width="420" height="12" rx="4" fill="#1A1A1A"/>
+  <rect x="245" y="558" width="330" height="4" rx="2" fill="#C9A84C" opacity="0.6"/>
+
+  <!-- Nombre -->
+  <text x="410" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#1A1A1A" letter-spacing="10">COCINAS INTEGRALES</text>
+  <line x1="240" y1="636" x2="580" y2="636" stroke="#CCCCCC" stroke-width="1.5"/>
+  <text x="410" y="664" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#8A7340" letter-spacing="10">BARRANCABERMEJA</text>
+  <text x="410" y="700" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#AAAAAA" letter-spacing="5">DISEÑO · FABRICACIÓN · INSTALACIÓN</text>
+</svg>
