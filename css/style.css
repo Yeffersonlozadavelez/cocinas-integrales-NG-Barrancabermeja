@@ -40,7 +40,6 @@ body {
   color: var(--ng-neutro-700);
   line-height: 1.75;
   overflow-x: hidden;
-  padding-top: 80px;
 }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
@@ -149,9 +148,8 @@ img { max-width: 100%; display: block; }
 ══════════════════════════════════════ */
 .header {
   background: var(--ng-negro);
-  position: fixed;
+  position: sticky;
   top: 0;
-  width: 100%;
   z-index: 1000;
 }
 
