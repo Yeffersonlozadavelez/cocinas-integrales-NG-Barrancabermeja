@@ -46,7 +46,7 @@ ul { list-style: none; }
 img { max-width: 100%; display: block; }
 
 /* ─── Container ─── */
-.container {
+.nav__container {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 2rem;

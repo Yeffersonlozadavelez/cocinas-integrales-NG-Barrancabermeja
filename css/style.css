@@ -33,7 +33,6 @@
 
 /* ─── Reset ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-cuerpo);
@@ -46,11 +45,16 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
 
+.header {
+  background: var(--ng-negro);
+  position: relative;
+}
+
 /* ─── Container ─── */
-.container {
+.nav__container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0;
+  padding: 0 2rem;
 }
 
 /* ─── Utilities ─── */
@@ -70,8 +74,35 @@ img { max-width: 100%; display: block; }
 .section__header {
   text-align: center;
   max-width: 600px;
-  margin: auto;
+  margin: 0 auto 60px;
 }
+
+/*.nav_nombre {
+  min-height: 5px;
+  text-align: center;
+  text-size-adjust: unset;
+  text-wrap: unset;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #FFFFFF;
+  font-size: 15px;
+  line-height: 1.0;
+  margin: auto;
+  padding: auto;
+}
+  */
+
+.DFI{
+  color: var(--ng-neutro-700);
+}
+
+.BRC{
+  color: var(--ng-dorado);
+}
+
+
+
 .section__title {
   font-family: var(--font-titular);
   font-size: clamp(28px, 4vw, 42px);
@@ -149,9 +180,8 @@ img { max-width: 100%; display: block; }
 ══════════════════════════════════════ */
 .header {
   background: var(--ng-negro);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  position: relative;
+  padding: 100px 100px 100px 100px;
 }
 
 .nav {
@@ -160,7 +190,9 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
   padding-top: 22px;
   padding-bottom: 22px;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background: var(--ng-negro);
   transition: box-shadow var(--transition);
 }
@@ -221,7 +253,6 @@ img { max-width: 100%; display: block; }
 /* ─── Hero ─── */
 .hero {
   padding: 100px 0 120px;
-  margin:0%;
   position: relative;
   display: flex;
   align-items: center;
