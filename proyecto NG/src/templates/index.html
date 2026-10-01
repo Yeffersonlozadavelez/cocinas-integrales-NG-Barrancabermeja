@@ -263,40 +263,8 @@
         <p class="eyebrow eyebrow--dark">Clientes</p>
         <h2 class="section__title">Lo que dicen de nosotros</h2>
       </div>
-      <div class="testimonios__grid">
-        <div class="testimonio">
-          <div class="testimonio__stars">★★★★★</div>
-          <p class="testimonio__text">"Quedé encantada con el resultado. El equipo de NG fue muy profesional, cumplieron los tiempos y la cocina quedó exactamente como la soñé."</p>
-          <div class="testimonio__author">
-            <div class="testimonio__avatar">MP</div>
-            <div>
-              <div class="testimonio__name">María Pérez</div>
-              <div class="testimonio__city">Barrancabermeja</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonio testimonio--featured">
-          <div class="testimonio__stars">★★★★★</div>
-          <p class="testimonio__text">"El diseño 3D que nos mostraron fue clave para tomar la decisión. Ver la cocina antes de fabricarla nos dio mucha confianza. El resultado superó nuestras expectativas."</p>
-          <div class="testimonio__author">
-            <div class="testimonio__avatar">CR</div>
-            <div>
-              <div class="testimonio__name">Carlos Rodríguez</div>
-              <div class="testimonio__city">Barrancabermeja</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonio">
-          <div class="testimonio__stars">★★★★★</div>
-          <p class="testimonio__text">"Remodelamos nuestra cocina antigua y parece otra. Excelentes materiales, buen precio y atención personalizada. Los recomiendo sin dudar."</p>
-          <div class="testimonio__author">
-            <div class="testimonio__avatar">LG</div>
-            <div>
-              <div class="testimonio__name">Laura Gómez</div>
-              <div class="testimonio__city">Barrancabermeja</div>
-            </div>
-          </div>
-        </div>
+      <div class="testimonios__grid" id="testimonios-grid" aria-live="polite">
+        <p class="testimonios__status">Cargando valoraciones...</p>
       </div>
     </div>
   </section>
@@ -466,6 +434,73 @@
       el.classList.add('reveal');
       observer.observe(el);
     });
+
+    const testimoniosGrid = document.getElementById('testimonios-grid');
+    fetch('../../../api_testimonios.php')
+      .then(response => {
+        if (!response.ok) throw new Error('No se pudieron cargar las valoraciones');
+        return response.json();
+      })
+      .then(result => {
+        if (result.status !== 'success' || !result.data.length) {
+          testimoniosGrid.textContent = 'Aún no hay valoraciones aprobadas.';
+          return;
+        }
+
+        testimoniosGrid.replaceChildren();
+        result.data.forEach((testimonio, index) => {
+          const calificacion = Math.min(5, Math.max(1, Number(testimonio.calificacion) || 5));
+          const tarjeta = document.createElement('article');
+          tarjeta.className = 'testimonio reveal visible';
+          if (index === 1) tarjeta.classList.add('testimonio--featured');
+
+          let imagenUrl = '';
+          if (testimonio.imagen) {
+            imagenUrl = new URL(`../../../${testimonio.imagen}`, window.location.href).href;
+            tarjeta.classList.add('testimonio--with-image');
+            tarjeta.style.backgroundImage = `linear-gradient(to bottom, rgba(10,10,10,.55), rgba(10,10,10,.88)), url("${imagenUrl}")`;
+          }
+
+          const estrellas = document.createElement('div');
+          estrellas.className = 'testimonio__stars';
+          estrellas.setAttribute('aria-label', `Calificación ${calificacion} de 5`);
+          estrellas.append(`${'★'.repeat(calificacion)}${'☆'.repeat(5 - calificacion)}`);
+          const puntaje = document.createElement('span');
+          puntaje.className = 'testimonio__score';
+          puntaje.textContent = `(${calificacion}/5)`;
+          estrellas.append(puntaje);
+
+          const mensaje = document.createElement('p');
+          mensaje.className = 'testimonio__text';
+          mensaje.textContent = `"${testimonio.mensaje || ''}"`;
+
+          const autor = document.createElement('div');
+          autor.className = 'testimonio__author';
+          const avatar = document.createElement('div');
+          avatar.className = 'testimonio__avatar';
+          if (imagenUrl) {
+            avatar.style.backgroundImage = `url("${imagenUrl}")`;
+            avatar.setAttribute('aria-hidden', 'true');
+          } else {
+            avatar.textContent = (testimonio.nombre || 'NG').trim().split(/\s+/).map(parte => parte[0]).join('').slice(0, 2).toUpperCase();
+          }
+
+          const datosAutor = document.createElement('div');
+          const nombre = document.createElement('div');
+          nombre.className = 'testimonio__name';
+          nombre.textContent = testimonio.nombre || '';
+          const ciudad = document.createElement('div');
+          ciudad.className = 'testimonio__city';
+          ciudad.textContent = testimonio.ciudad || '';
+          datosAutor.append(nombre, ciudad);
+          autor.append(avatar, datosAutor);
+          tarjeta.append(estrellas, mensaje, autor);
+          testimoniosGrid.append(tarjeta);
+        });
+      })
+      .catch(() => {
+        testimoniosGrid.textContent = 'No se pudieron cargar las valoraciones en este momento.';
+      });
   </script>
 </body>
 </html>
